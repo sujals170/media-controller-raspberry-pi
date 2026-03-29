@@ -2,6 +2,12 @@
 
 Smart media display app for Raspberry Pi shops. Show photos and videos on a TV screen and control playback from a simple web panel.
 
+## Platform Support
+
+- Windows: App runs normally (Flask web panel + playback logic)
+- Raspberry Pi/Linux: Full support including auto-start service setup
+- `install_shop_service.sh` and `systemd` commands are Linux/Raspberry Pi only
+
 ## Features
 
 - Web control panel for starting and managing playback
@@ -29,7 +35,22 @@ Py/
   pending_delete.json
 ```
 
-## Quick Start (Local)
+## Quick Start on Windows
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
+```
+
+Then open:
+
+```text
+http://localhost:5000
+```
+
+## Quick Start on Linux/Raspberry Pi
 
 ```bash
 python -m venv .venv
