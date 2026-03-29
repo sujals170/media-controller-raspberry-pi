@@ -74,13 +74,6 @@ sudo systemctl stop media-controller.service
 sudo journalctl -u media-controller.service -n 100 --no-pager
 ```
 
-## Troubleshooting
-
-- `python` not found: install Python and reopen terminal
-- `pip install` fails: check internet and rerun command
-- Port `5000` already in use: stop old process or run on another port
-- Phone cannot open panel: keep phone and device on same Wi-Fi/LAN
-
 ## Project Structure
 
 ```text
