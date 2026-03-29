@@ -1,20 +1,85 @@
 # Media Controller for Raspberry Pi
 
-Smart media display app for Raspberry Pi shops. Show photos and videos on a TV screen and control playback from a simple web panel.
+Smart media display app for shops.  
+You can show photos/videos on a TV screen and control playback from a simple web panel.
 
-## Platform Support
+## Where It Works
 
-- Windows: App runs normally (Flask web panel + playback logic)
-- Raspberry Pi/Linux: Full support including auto-start service setup
-- `install_shop_service.sh` and `systemd` commands are Linux/Raspberry Pi only
+- Windows laptop/desktop: Supported for normal app usage
+- Linux/Raspberry Pi: Fully supported (including auto-start service)
+- `install_shop_service.sh`: Linux/Raspberry Pi only
 
-## Features
+## What You Need Before Setup
 
-- Web control panel for starting and managing playback
-- Slideshow support for photos and videos
-- Service-based startup on boot (`systemd`)
-- Folder-based media management (`photos/` and `videos/`)
-- Lightweight Flask backend
+- Python 3.9+ installed
+- Internet for first-time dependency install
+- This project folder downloaded/cloned on your system
+
+## Fast Setup for Windows Users
+
+Open PowerShell in project folder and run:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
+```
+
+Open in browser:
+
+```text
+http://localhost:5000
+```
+
+## Fast Setup for Linux/Raspberry Pi Users
+
+### Option A: Manual run
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python app.py
+```
+
+Open in browser:
+
+```text
+http://<device-ip>:5000
+```
+
+### Option B: Auto-start service (recommended for shop use)
+
+```bash
+chmod +x install_shop_service.sh
+bash install_shop_service.sh
+```
+
+This script installs required packages, creates `.venv`, sets up `media-controller.service`, and starts it.
+
+## How to Use After Setup
+
+- Put images in `photos/`
+- Put videos in `videos/`
+- Start app/service
+- Open web panel and control playback
+
+## Useful Commands (Raspberry Pi)
+
+```bash
+sudo systemctl status media-controller.service
+sudo systemctl restart media-controller.service
+sudo systemctl stop media-controller.service
+sudo journalctl -u media-controller.service -n 100 --no-pager
+```
+
+## Troubleshooting
+
+- `python` not found: install Python and reopen terminal
+- `pip install` fails: check internet and rerun command
+- Port `5000` already in use: stop old process or run on another port
+- Phone cannot open panel: keep phone and device on same Wi-Fi/LAN
 
 ## Project Structure
 
@@ -34,53 +99,3 @@ Py/
   config.json
   pending_delete.json
 ```
-
-## Quick Start on Windows
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\activate
-pip install -r requirements.txt
-python app.py
-```
-
-Then open:
-
-```text
-http://localhost:5000
-```
-
-## Quick Start on Linux/Raspberry Pi
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python app.py
-```
-
-Then open:
-
-```text
-http://<device-ip>:5000
-```
-
-## Raspberry Pi Service Setup
-
-```bash
-chmod +x install_shop_service.sh
-bash install_shop_service.sh
-```
-
-After installation, useful commands:
-
-```bash
-sudo systemctl status media-controller.service
-sudo systemctl restart media-controller.service
-sudo journalctl -u media-controller.service -n 100 --no-pager
-```
-
-## Notes
-
-- Keep Raspberry Pi and phone/PC on same network for web access.
-- Use a stable LAN IP for reliable shop usage.
