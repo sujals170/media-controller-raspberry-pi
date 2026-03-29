@@ -1,6 +1,5 @@
 # Media Controller for Raspberry Pi
 
-Smart media display app for shops.  
 You can show photos/videos on a TV screen and control playback from a simple web panel.
 
 ## Where It Works
